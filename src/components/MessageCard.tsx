@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FileText, Image, File, FileArchive, Copy, Check, Trash2 } from 'lucide-react';
 import type { Message } from '../types/Message';
 import { LinkPreview } from './LinkPreview';
-import { openUrl } from '../utils/linkParser';
 import { Command } from '@tauri-apps/plugin-shell';
 import { formatCompactDate } from '../utils/dateFormatter';
 

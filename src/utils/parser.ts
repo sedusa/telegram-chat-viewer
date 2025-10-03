@@ -45,7 +45,7 @@ function isMessageLinkOnly(textContent: string, links: string[]): boolean {
 /**
  * Parse a single message element from HTML
  */
-function parseMessageElement($: cheerio.CheerioAPI, element: cheerio.Element): Message | null {
+function parseMessageElement($: cheerio.CheerioAPI, element: any): Message | null {
   const $msg = $(element);
   
   // Extract message ID

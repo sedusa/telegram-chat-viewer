@@ -45,12 +45,13 @@ xcode-select --install
    npm install
    ```
 
-3. **Generate Tauri icons** (you'll need to provide your own icon image):
-   ```bash
-   # Place a 1024x1024 PNG icon in the project root as app-icon.png, then:
-   npm install -g @tauri-apps/cli
-   tauri icon app-icon.png
-   ```
+3. **Icons are already configured!**
+   - The app uses the `app-icon.png` in the project root
+   - All icon sizes are already generated in `src-tauri/icons/`
+   - To update the icon in the future, replace `app-icon.png` and run:
+     ```bash
+     ./update-icon.sh
+     ```
 
 ## Development
 
@@ -158,10 +159,10 @@ telegram-chat-viewer/
 - Close other applications to free up memory
 - Consider splitting very large exports (100,000+ messages)
 
-### Icons Not Building
-- Ensure you have a valid 1024x1024 PNG icon
-- Install `@tauri-apps/cli` globally: `npm install -g @tauri-apps/cli`
-- Run `tauri icon <path-to-icon.png>`
+### Need to Update the App Icon?
+1. Replace `app-icon.png` in the project root with your new icon (1024x1024 PNG recommended)
+2. Run `./update-icon.sh` to regenerate all icon sizes
+3. Rebuild the app with `npm run tauri:build`
 
 ## Future Enhancements
 

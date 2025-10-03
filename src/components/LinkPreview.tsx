@@ -19,7 +19,6 @@ const LinkPreviewComponent: React.FC<LinkPreviewProps> = ({ url }) => {
   const [metadata, setMetadata] = useState<LinkMetadata | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -56,13 +55,10 @@ const LinkPreviewComponent: React.FC<LinkPreviewProps> = ({ url }) => {
 
     const fetchMetadata = async () => {
       try {
-        setLoading(true);
         const meta = await getLinkMetadata(url, parsed.domain);
         setMetadata(meta);
       } catch (error) {
         console.error('Failed to fetch metadata:', error);
-      } finally {
-        setLoading(false);
       }
     };
 

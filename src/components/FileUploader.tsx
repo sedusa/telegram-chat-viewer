@@ -1,7 +1,7 @@
 import React from 'react';
 import { Upload, FolderOpen } from 'lucide-react';
 import { open } from '@tauri-apps/plugin-dialog';
-import { readTextFile, readDir, BaseDirectory } from '@tauri-apps/plugin-fs';
+import { readTextFile, readDir } from '@tauri-apps/plugin-fs';
 import { parseMultipleFiles } from '../utils/parser';
 import type { Message } from '../types/Message';
 

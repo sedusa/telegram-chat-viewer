@@ -4,13 +4,13 @@ A native macOS desktop application for viewing and searching through exported Te
 
 ## Features
 
-- 📁 **Multiple Input Methods**: Load chats from folders or individual HTML files
-- 🔍 **Powerful Search**: Real-time search across message content, senders, and links
-- 📊 **Two View Modes**: Switch between compact list view and detailed card view
-- 🔗 **Link Previews**: Beautiful preview cards for URL-only messages
-- ⚡ **High Performance**: Optimized for large chat exports (10,000+ messages)
-- ⌨️ **Keyboard Shortcuts**: Full keyboard navigation support
-- 🎨 **Modern UI**: Clean, intuitive interface built with React and Tailwind CSS
+- **Multiple Input Methods**: Load chats from folders or individual HTML files
+- **Powerful Search**: Real-time search across message content, senders, and links
+- **Two View Modes**: Switch between compact list view and detailed card view
+- **Link Previews**: Beautiful preview cards for URL-only messages
+- **High Performance**: Optimized for large chat exports (10,000+ messages)
+- **Keyboard Shortcuts**: Full keyboard navigation support
+- **Modern UI**: Clean, intuitive interface built with React and Tailwind CSS
 
 ## Prerequisites
 
@@ -189,18 +189,15 @@ This is a personal project, but suggestions and bug reports are welcome!
 
 ## License
 
-This project is for personal use. Telegram® is a registered trademark of Telegram FZ-LLC.
+MIT License
 
-## Support
+Copyright (c) 2025 Samuel Edusa
 
-For issues or questions, please check:
-1. This README
-2. The PRD.md document for detailed specifications
-3. Telegram's export documentation
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
----
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-**Version**: 1.0.0  
-**Platform**: macOS 10.15+  
-**Last Updated**: 2025-10-03
-
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

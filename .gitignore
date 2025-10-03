@@ -26,6 +26,7 @@ src-tauri/Cargo.lock
 *.swo
 *~
 .cursor/
+.cursorrules
 
 # Logs
 npm-debug.log*

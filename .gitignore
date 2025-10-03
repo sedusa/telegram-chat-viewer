@@ -53,7 +53,7 @@ coverage/
 # Optional eslint cache
 .eslintcache
 
-# MD and txt files
+# MD and txt files (internal documentation)
 BACKUP_DATE_FEATURE.md
 PRD.md
 PROJECT_SUMMARY.md
@@ -65,6 +65,24 @@ DATE_FORMATTING_GUIDE.md
 START_HERE.md
 INSTALLATION_SUMMARY.txt
 BUILD_GUIDE.md
+
+# Sensitive or test data
+*.html
+*.zip
+test-data/
+exports/
+samples/
+chat-exports/
+
+# API keys and secrets (if any)
+*.key
+*.pem
+*.p12
+secrets.json
+config.local.json
+
+# Personal blog content
+blog-article.md
 
 # Docker files
 docker-compose.yml

@@ -53,5 +53,21 @@ coverage/
 # Optional eslint cache
 .eslintcache
 
+# MD and txt files
+BACKUP_DATE_FEATURE.md
+PRD.md
+PROJECT_SUMMARY.md
+SETUP.md
+QUICKSTART.md
+ICON_GUIDE.md
+DARK_MODE_GUIDE.md
+DATE_FORMATTING_GUIDE.md
+START_HERE.md
+INSTALLATION_SUMMARY.txt
+BUILD_GUIDE.md
+
+# Docker files
+docker-compose.yml
+
 # Debug files
 *.log

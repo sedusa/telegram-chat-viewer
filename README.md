@@ -171,8 +171,6 @@ telegram-chat-viewer/
 
 Planned features for future versions:
 
-- [ ] Media file previews (images, videos)
-- [ ] Dark mode theme
 - [ ] Export filtered results
 - [ ] Advanced date range filters
 - [ ] Multi-chat support

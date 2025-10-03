@@ -24,7 +24,7 @@ const getMediaIcon = (mediaType: string | null) => {
   }
 };
 
-export const MessageListItem: React.FC<MessageListProps> = React.memo(({ message, onDelete, basePath }) => {
+const MessageListItemComponent: React.FC<MessageListProps> = ({ message, onDelete, basePath }) => {
   const handleLinkClick = async (e: React.MouseEvent) => {
     if (message.isLinkOnly && message.links.length > 0) {
       e.preventDefault();
@@ -144,6 +144,15 @@ export const MessageListItem: React.FC<MessageListProps> = React.memo(({ message
         </div>
       </div>
     </div>
+  );
+};
+
+// Memoize with custom comparison to prevent unnecessary re-renders
+export const MessageListItem = React.memo(MessageListItemComponent, (prevProps, nextProps) => {
+  return (
+    prevProps.message.id === nextProps.message.id &&
+    prevProps.message.text === nextProps.message.text &&
+    prevProps.basePath === nextProps.basePath
   );
 });
 

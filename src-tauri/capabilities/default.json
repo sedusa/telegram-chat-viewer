@@ -9,6 +9,18 @@
     "fs:default",
     "shell:default",
     "shell:allow-execute",
+    "http:default",
+    {
+      "identifier": "http:default",
+      "allow": [
+        {
+          "url": "http://*/*"
+        },
+        {
+          "url": "https://*/*"
+        }
+      ]
+    },
     {
       "identifier": "shell:allow-execute",
       "allow": [

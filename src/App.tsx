@@ -1,10 +1,11 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect, useTransition } from 'react';
 import { FileUploader } from './components/FileUploader';
 import { SearchBar } from './components/SearchBar';
 import { MessageCard } from './components/MessageCard';
 import { MessageListItem } from './components/MessageList';
 import { filterMessages } from './utils/parser';
 import type { Message, ViewMode } from './types/Message';
+import { FixedSizeList as List } from 'react-window';
 
 function App() {
   // Initialize dark mode from localStorage before first render
@@ -15,6 +16,7 @@ function App() {
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState<ViewMode>(() => {
     const saved = localStorage.getItem('viewMode');
     return (saved as ViewMode) || 'list';
@@ -23,6 +25,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [backupDate, setBackupDate] = useState<string | undefined>(undefined);
   const [basePath, setBasePath] = useState<string | undefined>(undefined);
+  const [, startTransition] = useTransition();
 
   // Apply dark mode class immediately on mount and when changed
   useEffect(() => {
@@ -39,13 +42,25 @@ function App() {
     localStorage.setItem('viewMode', viewMode);
   }, [viewMode]);
 
+  // Debounce search term
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      startTransition(() => {
+        setDebouncedSearchTerm(searchTerm);
+      });
+    }, 150); // 150ms debounce
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // ⌘F - Focus search
       if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
         e.preventDefault();
-        document.querySelector('input[type="text"]')?.focus();
+        const input = document.querySelector('input[type="text"]') as HTMLInputElement | null;
+        input?.focus();
       }
       
       // ⌘1 - List view
@@ -70,10 +85,10 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Debounced search with useMemo
+  // Filtered messages with debounced search
   const filteredMessages = useMemo(() => {
-    return filterMessages(messages, searchTerm);
-  }, [messages, searchTerm]);
+    return filterMessages(messages, debouncedSearchTerm);
+  }, [messages, debouncedSearchTerm]);
 
   const handleMessagesLoaded = useCallback((loadedMessages: Message[], date?: string, path?: string) => {
     setMessages(loadedMessages);
@@ -153,7 +168,7 @@ function App() {
         backupDate={backupDate}
       />
 
-      <div className="flex-1 overflow-y-auto overflow-x-hidden">
+      <div className="flex-1 overflow-hidden">
         {filteredMessages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center text-gray-500 dark:text-gray-400">
@@ -162,27 +177,37 @@ function App() {
             </div>
           </div>
         ) : viewMode === 'card' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
-            {filteredMessages.map((message) => (
-              <MessageCard 
-                key={message.id} 
-                message={message}
-                onDelete={handleDeleteMessage}
-                basePath={basePath}
-              />
-            ))}
+          <div className="h-full overflow-y-auto overflow-x-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
+              {filteredMessages.map((message) => (
+                <MessageCard 
+                  key={message.id} 
+                  message={message}
+                  onDelete={handleDeleteMessage}
+                  basePath={basePath}
+                />
+              ))}
+            </div>
           </div>
         ) : (
-          <div className="bg-white dark:bg-gray-800">
-            {filteredMessages.map((message) => (
-              <MessageListItem 
-                key={message.id} 
-                message={message}
-                onDelete={handleDeleteMessage}
-                basePath={basePath}
-              />
-            ))}
-          </div>
+          <List
+            height={window.innerHeight - 80}
+            itemCount={filteredMessages.length}
+            itemSize={80}
+            width="100%"
+            className="bg-white dark:bg-gray-800"
+            itemData={{ messages: filteredMessages, onDelete: handleDeleteMessage, basePath }}
+          >
+            {({ index, style, data }) => (
+              <div style={style}>
+                <MessageListItem 
+                  message={data.messages[index]}
+                  onDelete={data.onDelete}
+                  basePath={data.basePath}
+                />
+              </div>
+            )}
+          </List>
         )}
       </div>
     </div>

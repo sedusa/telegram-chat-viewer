@@ -25,7 +25,7 @@ const getMediaIcon = (mediaType: string | null) => {
   }
 };
 
-export const MessageCard: React.FC<MessageCardProps> = React.memo(({ message, onDelete, basePath }) => {
+const MessageCardComponent: React.FC<MessageCardProps> = ({ message, onDelete, basePath }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -179,19 +179,26 @@ export const MessageCard: React.FC<MessageCardProps> = React.memo(({ message, on
       )}
       
       {message.links.length > 0 && !message.isLinkOnly && (
-        <div className="mt-2 space-y-1">
+        <div className="mt-2 space-y-2">
           {message.links.map((link, idx) => (
-            <button
-              key={idx}
-              onClick={() => openUrl(link)}
-              className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-xs block truncate text-left underline w-full"
-            >
-              {link}
-            </button>
+            <div key={idx} className="space-y-2">
+              <LinkPreview url={link} />
+            </div>
           ))}
         </div>
       )}
     </div>
+  );
+};
+
+// Memoize with custom comparison to prevent unnecessary re-renders
+export const MessageCard = React.memo(MessageCardComponent, (prevProps, nextProps) => {
+  // Only re-render if message content or basePath changes
+  return (
+    prevProps.message.id === nextProps.message.id &&
+    prevProps.message.text === nextProps.message.text &&
+    prevProps.message.links.length === nextProps.message.links.length &&
+    prevProps.basePath === nextProps.basePath
   );
 });
 

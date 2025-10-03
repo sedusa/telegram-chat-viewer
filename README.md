@@ -37,9 +37,10 @@ xcode-select --install
 
 ## Installation
 
-1. **Clone or navigate to the repository**:
+1. **Clone the repository**:
    ```bash
-   cd /Users/samueledusa/Desktop/code/my-projects/telegram-chat-viewer
+   git clone https://github.com/sedusa/telegram-chat-viewer.git
+   cd telegram-chat-viewer
    ```
 
 2. **Install dependencies**:

@@ -2,7 +2,7 @@
 
 A native macOS desktop application for viewing and searching through exported Telegram chat data.
 
-![Telegram icon](./app-icon.png)
+<img src="./app-icon.png" alt="Telegram Chat Viewer Icon" width="300" />
 
 ## Features
 

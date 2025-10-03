@@ -2,6 +2,8 @@
 
 A native macOS desktop application for viewing and searching through exported Telegram chat data.
 
+![Telegram icon](./app-icon.png)
+
 ## Features
 
 - **Multiple Input Methods**: Load chats from folders or individual HTML files

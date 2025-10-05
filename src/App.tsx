@@ -3,6 +3,7 @@ import { FileUploader } from './components/FileUploader';
 import { SearchBar } from './components/SearchBar';
 import { MessageCard } from './components/MessageCard';
 import { MessageListItem } from './components/MessageList';
+import { SideMenu } from './components/SideMenu';
 import { filterMessages } from './utils/parser';
 import type { Message, ViewMode } from './types/Message';
 import { FixedSizeList as List } from 'react-window';
@@ -26,6 +27,7 @@ function App() {
   const [backupDate, setBackupDate] = useState<string | undefined>(undefined);
   const [basePath, setBasePath] = useState<string | undefined>(undefined);
   const [, startTransition] = useTransition();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Apply dark mode class immediately on mount and when changed
   useEffect(() => {
@@ -118,6 +120,24 @@ function App() {
     setDarkMode(prev => !prev);
   }, []);
 
+  const handleMenuOpen = useCallback(() => {
+    setIsMenuOpen(true);
+  }, []);
+
+  const handleMenuClose = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
+  const handleEjectBackup = useCallback(() => {
+    // Reset all state to return to upload screen
+    setMessages([]);
+    setSearchTerm('');
+    setDebouncedSearchTerm('');
+    setBackupDate(undefined);
+    setBasePath(undefined);
+    setError(null);
+  }, []);
+
   // Show empty state if no messages loaded
   if (messages.length === 0 && !loading) {
     return (
@@ -166,6 +186,13 @@ function App() {
         darkMode={darkMode}
         onToggleDarkMode={handleToggleDarkMode}
         backupDate={backupDate}
+        onMenuOpen={handleMenuOpen}
+      />
+
+      <SideMenu
+        isOpen={isMenuOpen}
+        onClose={handleMenuClose}
+        onEjectBackup={handleEjectBackup}
       />
 
       <div className="flex-1 overflow-hidden">

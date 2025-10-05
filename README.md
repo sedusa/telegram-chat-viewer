@@ -13,6 +13,8 @@ A native macOS desktop application for viewing and searching through exported Te
 - **High Performance**: Optimized for large chat exports (10,000+ messages)
 - **Keyboard Shortcuts**: Full keyboard navigation support
 - **Modern UI**: Clean, intuitive interface built with React and Tailwind CSS
+- **Dark Mode**: Toggle between light and dark themes
+- **Backup Management**: Easily eject current backup and load a new one
 
 ## Prerequisites
 
@@ -176,6 +178,29 @@ Planned features for future versions:
 - [ ] Multi-chat support
 - [ ] Message threading/replies
 - [ ] Export to PDF/CSV
+
+## Changelog
+
+### Version 1.1.0 (October 5, 2025)
+
+**New Features:**
+- **Backup Eject Menu**: Added a hamburger menu button next to the dark mode toggle with an "Eject Backup" option
+- **Confirmation Dialog**: Added confirmation prompt before ejecting a backup to prevent accidental exits
+- **Side Menu**: Implemented a smooth sliding menu from the right with proper overlay and animations
+- **Menu Button**: Added hamburger icon button in the top navigation bar
+
+**Improvements:**
+- **State Management**: Improved state handling when switching between backups
+- **User Flow**: Users can now easily return to the upload screen without restarting the app
+- **UX Enhancement**: Confirmation dialog properly blocks execution until user responds
+
+**Technical:**
+- Added `SideMenu` component with slide-in animation
+- Updated `SearchBar` to include menu trigger button
+- Enhanced `App.tsx` with eject backup functionality
+- Implemented proper event handling to prevent premature state changes
+
+---
 
 ## Privacy & Security
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, X, List, Grid, Moon, Sun } from 'lucide-react';
+import { Search, X, List, Grid, Moon, Sun, Menu } from 'lucide-react';
 import type { ViewMode } from '../types/Message';
 
 interface SearchBarProps {
@@ -12,6 +12,7 @@ interface SearchBarProps {
   darkMode: boolean;
   onToggleDarkMode: () => void;
   backupDate?: string;
+  onMenuOpen: () => void;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
@@ -24,6 +25,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   darkMode,
   onToggleDarkMode,
   backupDate,
+  onMenuOpen,
 }) => {
   return (
     <div className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm">
@@ -77,6 +79,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               title="Toggle Dark Mode"
             >
               {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+            <button
+              onClick={onMenuOpen}
+              className="p-2 rounded-lg transition-colors bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+              title="Open Menu"
+            >
+              <Menu className="w-5 h-5" />
             </button>
           </div>
         </div>

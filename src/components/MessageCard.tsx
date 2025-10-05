@@ -37,8 +37,10 @@ const MessageCardComponent: React.FC<MessageCardProps> = ({ message, onDelete, b
     }
   };
 
-  const handleDelete = () => {
-    if (confirm('Delete this message?')) {
+  const handleDelete = async () => {
+    // In Tauri, window.confirm returns a Promise, so we need to await it
+    const confirmed = await confirm('Delete this message?');
+    if (confirmed) {
       onDelete(message.id);
     }
   };

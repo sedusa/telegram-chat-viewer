@@ -93,9 +93,11 @@ const MessageListItemComponent: React.FC<MessageListProps> = ({ message, onDelet
     }
   };
 
-  const handleDelete = (e: React.MouseEvent) => {
+  const handleDelete = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (confirm('Delete this message?')) {
+    // In Tauri, window.confirm returns a Promise, so we need to await it
+    const confirmed = await confirm('Delete this message?');
+    if (confirmed) {
       onDelete(message.id);
     }
   };
